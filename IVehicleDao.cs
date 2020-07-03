@@ -6,7 +6,7 @@ namespace daoHomework
     {
         public List<Vehicle> GetAllVehicles();
         public Vehicle GetVehicle(int vehicleID);
-        public void UpdateVehicle(Vehicle vehicle);
         public void DeleteVehicle(Vehicle vehicle);
+        public void UpdateMaxPassengersNumber(Vehicle vehicle);
     }
 }
