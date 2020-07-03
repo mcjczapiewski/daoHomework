@@ -27,11 +27,11 @@ namespace daoHomework
 
         public void UpdateMaxPassengersNumber(Vehicle vehicle)
         {
-            var matchedVehicle = vehicles.FirstOrDefault(vehicle => vehicle.VehicleID == 1); //TODO: wprowadzanie id pojazdu do usuniecia przez uzytkownika
+            var matchedVehicle = vehicles.FirstOrDefault(vehicleFromList => vehicleFromList.VehicleID == vehicle.VehicleID);
             if (matchedVehicle != null)
             {
-                vehicle.MaxPassengersNumber = 4; //TODO: new value from user
-                Console.WriteLine($"Vehicle with ID {vehicle.VehicleID} has been updated in database.");
+                matchedVehicle.MaxPassengersNumber = vehicle.MaxPassengersNumber;
+                Console.WriteLine($"Vehicle with ID {matchedVehicle.VehicleType} has been updated in database.");
             }
         }
 

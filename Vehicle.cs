@@ -7,7 +7,7 @@ namespace daoHomework
         public int WheelsNumber { get; set; }
         public int MaxPassengersNumber { get; set; }
 
-        public Vehicle(int vehicleID, string vehicleType, int wheelsNumber, int maxPassengersNumber)
+        public Vehicle(int vehicleID, int maxPassengersNumber=2, string vehicleType="unkown", int wheelsNumber=4)
         {
             VehicleID = vehicleID;
             VehicleType = vehicleType;
