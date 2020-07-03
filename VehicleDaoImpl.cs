@@ -17,12 +17,12 @@ namespace daoHomework
 
         public List<Vehicle> GetAllVehicles()
         {
-            throw new System.NotImplementedException();
+            return vehicles;
         }
 
         public Vehicle GetVehicle(int vehicleID)
         {
-            throw new System.NotImplementedException();
+            return vehicles.First(vehicle => vehicle.VehicleID == vehicleID);
         }
 
         public void UpdateMaxPassengersNumber(Vehicle vehicle)
