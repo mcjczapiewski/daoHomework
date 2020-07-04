@@ -1,17 +1,24 @@
+using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace daoHomework
 {
     public class VehicleDaoImpl : IVehicleDao
     {
-        List<Vehicle> vehicles;
+        public List<Vehicle> vehicles;
 
         public VehicleDaoImpl()
         {
             vehicles = new List<Vehicle>();
-            //TODO: dodawanie z pliku csv
+            using var streamReader = new StreamReader("vehiclesList.csv");
+            var reader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+            reader.Configuration.RegisterClassMap<UserMap>();
+            vehicles = reader.GetRecords<Vehicle>().ToList();
 
         }
 
