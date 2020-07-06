@@ -6,10 +6,11 @@ namespace daoHomework
     {
         private static void Main()
         {
+            DatabaseConnection.ImportVehiclesFromDatabase();
             IVehicleDao vehicleDao = new VehicleDaoImpl();
 
             //print all
-            foreach (Vehicle vehicle in vehicleDao.GetAllVehicles())
+            foreach (var vehicle in vehicleDao.GetAllVehicles())
             {
                 Console.WriteLine($"Vehicle ID: {vehicle.VehicleID}, " +
                     $"Type: {vehicle.VehicleType}, " +
@@ -20,9 +21,9 @@ namespace daoHomework
             //update
             Console.WriteLine("What is the Vehicle ID to update?");
             Console.Write("> ");
-            string passedValue = Console.ReadLine();
-            int userPassedID = Convert.ToInt32(passedValue);
-            Vehicle vehicleToUpdate = new Vehicle(userPassedID);
+            var passedValue = Console.ReadLine();
+            var userPassedID = Convert.ToInt32(passedValue);
+            var vehicleToUpdate = new Vehicle(userPassedID);
 
             Console.WriteLine("What should be new available seats value?");
             Console.Write("> ");
@@ -43,7 +44,7 @@ namespace daoHomework
                 $"Wheels: {vehicleRetrieved.WheelsNumber}, " +
                 $"Passengers capacity: {vehicleRetrieved.MaxPassengersNumber}");
 
-            //detele
+            //delete
             Console.WriteLine("What is the Vehicle ID to delete?");
             Console.Write("> ");
             passedValue = Console.ReadLine();
