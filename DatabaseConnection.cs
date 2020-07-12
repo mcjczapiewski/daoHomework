@@ -5,6 +5,8 @@ namespace daoHomework
 {
     internal class DatabaseConnection
     {
+        static IVehicleDao vehicleDao = new VehicleDaoImpl();
+
         public static SqlConnection dbConnection = new SqlConnection(@"Server=HORIZON17\SQLEXPRESS;Database=vehicleList;Trusted_Connection=True;");
 
         public static void ExecuteCommand(string command)
@@ -26,9 +28,7 @@ namespace daoHomework
                                               reader["Type"].ToString(),
                                               Convert.ToInt32(reader["Wheels"]),
                                               Convert.ToInt32(reader["Seats"]));
-
-                VehicleDaoImpl.Vehicles.Add(vehicle);
-                //Console.WriteLine(VehicleDaoImpl.Vehicles);
+                vehicleDao.AddVehicle(vehicle);
             }
             reader.Close();
             dbConnection.Close();

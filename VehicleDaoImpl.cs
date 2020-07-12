@@ -6,31 +6,35 @@ namespace daoHomework
 {
     public class VehicleDaoImpl : IVehicleDao
     {
-        public static List<Vehicle> Vehicles = new List<Vehicle>();
+        private static List<Vehicle> vehicles = new List<Vehicle>();
+
+        public void AddVehicle(Vehicle vehicle)
+        {
+            vehicles.Add(vehicle);
+        }
 
         public void DeleteVehicle(Vehicle vehicle)
         {
-            DatabaseConnection.ImportVehiclesFromDatabase();
             DatabaseConnection.ExecuteCommand(@$"DELETE FROM [dbo].[vehiclesList]
 WHERE [ID] = {vehicle.VehicleID}");
-            Vehicles.Remove(vehicle);
+            vehicles.Remove(vehicle);
             Console.WriteLine($"Vehicle with ID {vehicle.VehicleID} has been removed from database.");
         }
 
         public List<Vehicle> GetAllVehicles()
         {
-            return Vehicles;
+            DatabaseConnection.ImportVehiclesFromDatabase();
+            return vehicles;
         }
 
         public Vehicle GetVehicle(int vehicleID)
         {
-            return Vehicles.First(vehicle => vehicle.VehicleID == vehicleID);
+            return vehicles.First(vehicle => vehicle.VehicleID == vehicleID);
         }
 
         public void UpdateMaxPassengersNumber(Vehicle vehicle)
         {
-            DatabaseConnection.ImportVehiclesFromDatabase();
-            var matchedVehicle = Vehicles.FirstOrDefault(vehicleFromList => vehicleFromList.VehicleID == vehicle.VehicleID);
+            var matchedVehicle = vehicles.FirstOrDefault(vehicleFromList => vehicleFromList.VehicleID == vehicle.VehicleID);
             if (matchedVehicle != null)
             {
                 DatabaseConnection.ExecuteCommand(@$"UPDATE [dbo].[vehiclesList]
