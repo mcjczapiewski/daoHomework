@@ -6,7 +6,6 @@ namespace daoHomework
     {
         private static void Main()
         {
-            DatabaseConnection.ImportVehiclesFromDatabase();
             IVehicleDao vehicleDao = new VehicleDaoImpl();
 
             //print all

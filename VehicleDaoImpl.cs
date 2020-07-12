@@ -10,6 +10,7 @@ namespace daoHomework
 
         public void DeleteVehicle(Vehicle vehicle)
         {
+            DatabaseConnection.ImportVehiclesFromDatabase();
             DatabaseConnection.ExecuteCommand(@$"DELETE FROM [dbo].[vehiclesList]
 WHERE [ID] = {vehicle.VehicleID}");
             Vehicles.Remove(vehicle);
@@ -28,6 +29,7 @@ WHERE [ID] = {vehicle.VehicleID}");
 
         public void UpdateMaxPassengersNumber(Vehicle vehicle)
         {
+            DatabaseConnection.ImportVehiclesFromDatabase();
             var matchedVehicle = Vehicles.FirstOrDefault(vehicleFromList => vehicleFromList.VehicleID == vehicle.VehicleID);
             if (matchedVehicle != null)
             {
