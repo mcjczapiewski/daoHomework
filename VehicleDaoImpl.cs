@@ -15,8 +15,7 @@ namespace daoHomework
 
         public void DeleteVehicle(Vehicle vehicle)
         {
-            DatabaseConnection.ExecuteCommand(@$"DELETE FROM [dbo].[vehiclesList]
-WHERE [ID] = {vehicle.VehicleID}");
+            DatabaseConnection.RemoveFromDatabase(vehicle.VehicleID);
             vehicles.Remove(vehicle);
             Console.WriteLine($"Vehicle with ID {vehicle.VehicleID} has been removed from database.");
         }
@@ -37,9 +36,7 @@ WHERE [ID] = {vehicle.VehicleID}");
             var matchedVehicle = vehicles.FirstOrDefault(vehicleFromList => vehicleFromList.VehicleID == vehicle.VehicleID);
             if (matchedVehicle != null)
             {
-                DatabaseConnection.ExecuteCommand(@$"UPDATE [dbo].[vehiclesList]
-SET [Seats] = {vehicle.MaxPassengersNumber}
-WHERE [ID] = {vehicle.VehicleID}");
+                DatabaseConnection.UpdatePassengersSeatsInDatabase(vehicle);
                 matchedVehicle.MaxPassengersNumber = vehicle.MaxPassengersNumber;
                 Console.WriteLine($"Vehicle with ID {matchedVehicle.VehicleType} has been updated in database.");
             }

@@ -7,7 +7,7 @@ namespace daoHomework
     {
         static IVehicleDao vehicleDao = new VehicleDaoImpl();
 
-        public static SqlConnection dbConnection = new SqlConnection(@"Server=HORIZON17\SQLEXPRESS;Database=vehicleList;Trusted_Connection=True;");
+        private static SqlConnection dbConnection = new SqlConnection(@"Server=HORIZON17\SQLEXPRESS;Database=vehicleList;Trusted_Connection=True;");
 
         public static void ExecuteCommand(string command)
         {
@@ -32,6 +32,19 @@ namespace daoHomework
             }
             reader.Close();
             dbConnection.Close();
+        }
+
+        public static void RemoveFromDatabase(int vehicleID)
+        {
+            ExecuteCommand(@$"DELETE FROM [dbo].[vehiclesList]
+WHERE [ID] = {vehicleID}");
+        }
+
+        public static void UpdatePassengersSeatsInDatabase(Vehicle vehicle)
+        {
+            DatabaseConnection.ExecuteCommand(@$"UPDATE [dbo].[vehiclesList]
+SET [Seats] = {vehicle.MaxPassengersNumber}
+WHERE [ID] = {vehicle.VehicleID}");
         }
     }
 }
